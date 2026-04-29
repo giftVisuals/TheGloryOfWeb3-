@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TheGloryOfWeb3 | Pro Video Editor</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            --primary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --dark-bg: #020617;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- CLAMP TYPOGRAPHY (The Mobile Fix) --- */
+        .hero-title {
+            font-size: clamp(2.2rem, 10vw, 6rem);
+            line-height: 1.1;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.75rem, 3vw, 1.1rem);
+            letter-spacing: 0.15em;
+        }
+
+        /* --- GLASSMORPHISM --- */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.25rem;
+        }
+
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- DYNAMIC BACKGROUND --- */
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(30, 58, 138, 0.4) 0%, transparent 45%),
+                radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.2) 0%, transparent 45%);
+        }
+
+        .glow-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- MOBILE SPACING FIX --- */
+        @media (max-width: 640px) {
+            .section-padding { padding-top: 5rem; padding-bottom: 5rem; }
+            .mobile-stack { flex-direction: column; width: 100%; }
+            .mobile-full-btn { width: 100% !important; text-align: center; }
+        }
+
+        /* Animation for Floating Elements */
+        .float { animation: floating 4s ease-in-out infinite; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-mesh"></div>
+
+    <nav class="fixed w-full z-[100] top-0 left-0 px-4 py-3">
+        <div class="max-w-6xl mx-auto glass flex justify-between items-center px-4 py-2">
+            <div class="flex items-center gap-2">
+                <img src="https://i.postimg.cc/nL3Sgr70/IMG-20260429-165713-570.jpg" alt="Logo" class="w-9 h-9 rounded-full border border-blue-500">
+                <span class="font-bold text-sm tracking-tight hidden xs:block">TheGloryOfWeb3</span>
+            </div>
+            <a href="https://1drv.ms/f/c/2049039B73D97210/IgCZYbcJg4iSSbT64GSJbvCAAfrJ3AP69GPkO8xtygD5PsM" 
+               class="bg-blue-600 hover:bg-blue-500 text-white text-[11px] md:text-xs font-black px-4 py-2 rounded-lg uppercase tracking-tighter transition-all glow-button">
+                View Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-[90vh] flex flex-col justify-center items-center px-6 text-center">
+        <div data-aos="zoom-out" data-aos-duration="1000" class="w-full">
+            <h1 class="hero-title text-gradient mb-4">TheGloryOfWeb3</h1>
+            
+            <p class="hero-subtitle text-blue-400 font-bold mb-6 uppercase">
+                Video Editor <span class="text-white/20 px-1">|</span> Motion Designer <span class="text-white/20 px-1">|</span> AI Creator
+            </p>
+            
+            <p class="max-w-md mx-auto text-gray-400 text-sm md:text-base leading-relaxed mb-10 px-4">
+                "I create high-retention videos that capture attention instantly and drive results."
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-xs sm:max-w-none mx-auto">
+                <a href="#contact" class="mobile-full-btn glass px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-blue-600 transition-all border-blue-500/40 glow-button">
+                    Get In Touch
+                </a>
+                <a href="#portfolio" class="mobile-full-btn px-8 py-4 font-bold text-xs uppercase tracking-widest border border-white/10 rounded-2xl hover:bg-white/5 transition-all">
+                    Explore Work
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce text-blue-500 opacity-30">
+            <i data-lucide="chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="section-padding px-6 max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold mb-6">Visual Engineering <br><span class="text-blue-500 text-xl font-medium">Over 15M+ Views Generated</span></h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    I specialize in high-conversion video assets for the modern web. From 250+ delivered projects to viral ad campaigns, I blend 2 years of experience with cutting-edge AI tools.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass p-5">
+                        <span class="block text-2xl font-bold text-blue-500">250+</span>
+                        <span class="text-[10px] text-gray-500 uppercase font-bold">Videos Done</span>
+                    </div>
+                    <div class="glass p-5">
+                        <span class="block text-2xl font-bold text-blue-500">15M+</span>
+                        <span class="text-[10px] text-gray-500 uppercase font-bold">Total Views</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4" data-aos="fade-left">
+                <div class="glass p-5 flex items-start gap-4 hover:border-blue-500/30 transition-all">
+                    <i data-lucide="zap" class="text-blue-500 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-sm">High Retention Editing</h4>
+                        <p class="text-xs text-gray-500">Fast-paced, psychological editing to stop the scroll.</p>
+                    </div>
+                </div>
+                <div class="glass p-5 flex items-start gap-4 hover:border-blue-500/30 transition-all">
+                    <i data-lucide="layers" class="text-blue-500 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-sm">Motion Design</h4>
+                        <p class="text-xs text-gray-500">Seamless transitions and 2D/3D dynamic elements.</p>
+                    </div>
+                </div>
+                <div class="glass p-5 flex items-start gap-4 hover:border-blue-500/30 transition-all">
+                    <i data-lucide="sparkles" class="text-blue-500 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-sm">AI Content Creation</h4>
+                        <p class="text-xs text-gray-500">Next-gen AI workflows for futuristic visuals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-blue-950/10 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">My Services</h2>
+                <div class="h-1 w-12 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-8 text-center hover:bg-blue-600/5 transition-all" data-aos="zoom-in">
+                    <i data-lucide="video" class="mx-auto mb-4 text-blue-500" size="32"></i>
+                    <h3 class="font-bold mb-2 text-sm uppercase tracking-wider">Video Editing</h3>
+                    <p class="text-xs text-gray-400">Cinematic color grading and professional sound design.</p>
+                </div>
+                <div class="glass p-8 text-center hover:bg-blue-600/5 transition-all" data-aos="zoom-in" data-aos-delay="100">
+                    <i data-lucide="monitor" class="mx-auto mb-4 text-blue-500" size="32"></i>
+                    <h3 class="font-bold mb-2 text-sm uppercase tracking-wider">Motion Graphics</h3>
+                    <p class="text-xs text-gray-400">Dynamic typography and high-end title animations.</p>
+                </div>
+                <div class="glass p-8 text-center hover:bg-blue-600/5 transition-all" data-aos="zoom-in" data-aos-delay="200">
+                    <i data-lucide="cpu" class="mx-auto mb-4 text-blue-500" size="32"></i>
+                    <h3 class="font-bold mb-2 text-sm uppercase tracking-wider">AI Video</h3>
+                    <p class="text-xs text-gray-400">Synthetic media and advanced AI image-to-video generation.</p>
+                </div>
+                <div class="glass p-8 text-center hover:bg-blue-600/5 transition-all" data-aos="zoom-in">
+                    <i data-lucide="megaphone" class="mx-auto mb-4 text-blue-500" size="32"></i>
+                    <h3 class="font-bold mb-2 text-sm uppercase tracking-wider">Ad Creatives</h3>
+                    <p class="text-xs text-gray-400">ROI-focused ads designed for Facebook, TikTok & YouTube.</p>
+                </div>
+                <div class="glass p-8 text-center md:col-span-2 transition-all hover:bg-blue-600/5" data-aos="zoom-in">
+                    <i data-lucide="bar-chart-3" class="mx-auto mb-4 text-blue-500" size="32"></i>
+                    <h3 class="font-bold mb-2 text-sm uppercase tracking-wider">Social Optimization</h3>
+                    <p class="text-xs text-gray-400">A/B testing and hook-optimization for maximum organic reach.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding px-6 max-w-6xl mx-auto">
+        <h2 class="text-2xl font-bold mb-10 flex items-center gap-3">
+            Graphics design  <span class="h-[1px] flex-grow bg-white/10"></span>
+        </h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="glass overflow-hidden group aspect-video" data-aos="fade-up">
+                <img src="https://i.postimg.cc/GpwS1vTC/IMG-20260429-165259-748.jpg" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+            <div class="glass overflow-hidden group aspect-video" data-aos="fade-up" data-aos-delay="50">
+                <img src="https://i.postimg.cc/C1JvDtP5/IMG-20260429-165259-539.jpg" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+            <div class="glass overflow-hidden group aspect-video" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://i.postimg.cc/hv5pZmR5/IMG-20260429-165259-066.jpg" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+            <div class="glass overflow-hidden group aspect-video" data-aos="fade-up">
+                <img src="https://i.postimg.cc/4NY87WzG/IMG-20260429-165258-998.jpg" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+            <div class="glass overflow-hidden group aspect-video" data-aos="fade-up" data-aos-delay="50">
+                <img src="https://i.postimg.cc/k5vw3zdH/IMG-20260429-165259-191.jpg" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+            <div class="glass overflow-hidden group aspect-video" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://i.postimg.cc/dQx6YGgf/IMG-20260429-165259-046.jpg" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding px-6 bg-blue-600/5 relative overflow-hidden">
+        <h2 class="text-center text-2xl font-bold mb-12 italic">Client Feedback</h2>
+        <div class="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
+            <div class="glass p-6 w-full max-w-xs float" style="animation-delay: 0s;">
+                <div class="text-yellow-400 text-xs mb-3 font-bold">★★★★★</div>
+                <p class="text-xs text-gray-400 italic">"Amazing motion designer! My ads performed better instantly."</p>
+            </div>
+            <div class="glass p-6 w-full max-w-xs float" style="animation-delay: 1s;">
+                <div class="text-yellow-400 text-xs mb-3 font-bold">★★★★★</div>
+                <p class="text-xs text-gray-400 italic">"Very creative and fast delivery."</p>
+            </div>
+            <div class="glass p-6 w-full max-w-xs float" style="animation-delay: 2s;">
+                <div class="text-yellow-400 text-xs mb-3 font-bold">★★★★</div>
+                <p class="text-xs text-gray-400 italic">"Great communication and solid editing skills."</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding px-6 max-w-4xl mx-auto text-center">
+        <div class="glass p-8 md:p-16 border-blue-500/20 relative overflow-hidden">
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl"></div>
+            
+            <h2 class="text-3xl font-extrabold mb-4">Let's Work Together</h2>
+            <p class="text-gray-500 text-sm mb-10">Available for projects in 2026</p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <a href="mailto:Aweglory388@gmail" class="flex flex-col items-center gap-2 hover:text-blue-400 transition-colors">
+                    <div class="glass w-12 h-12 flex items-center justify-center"><i data-lucide="mail" size="20"></i></div>
+                    <span class="text-[10px] font-bold uppercase">Email</span>
+                </a>
+                <a href="https://t.me/TheGlory0fweb3" class="flex flex-col items-center gap-2 hover:text-blue-400 transition-colors">
+                    <div class="glass w-12 h-12 flex items-center justify-center"><i data-lucide="send" size="20"></i></div>
+                    <span class="text-[10px] font-bold uppercase">Telegram</span>
+                </a>
+                <a href="https://wa.me/2347054855966" class="flex flex-col items-center gap-2 hover:text-blue-400 transition-colors">
+                    <div class="glass w-12 h-12 flex items-center justify-center"><i data-lucide="message-circle" size="20"></i></div>
+                    <span class="text-[10px] font-bold uppercase">WhatsApp</span>
+                </a>
+                <a href="https://x.com/TheGloryofweb3" class="flex flex-col items-center gap-2 hover:text-blue-400 transition-colors">
+                    <div class="glass w-12 h-12 flex items-center justify-center"><i data-lucide="twitter" size="20"></i></div>
+                    <span class="text-[10px] font-bold uppercase">Twitter</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/5 text-center px-6">
+        <a href="https://1drv.ms/f/c/2049039B73D97210/IgCZYbcJg4iSSbT64GSJbvCAAfrJ3AP69GPkO8xtygD5PsM" 
+           class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all glow-button mb-10">
+            Open Portfolio
+        </a>
+        <p class="text-[10px] text-gray-600 uppercase tracking-widest">&copy; 2026 TheGloryOfWeb3 • Content Engineer</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ duration: 800, once: true });
+
+        // Navigation Background Toggle
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav div');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(2, 6, 23, 0.9)';
+                nav.style.borderColor = 'rgba(59, 130, 246, 0.2)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.03)';
+                nav.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+            }
+        });
+    </script>
+</body>
+</html>
+
