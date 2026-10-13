@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { cn } from '../lib/cn'
+import { motion } from 'motion/react'
 import { MaskedText, Reveal } from '../motion/Reveal'
+import { ease, viewport } from '../motion/tokens'
 
 interface SectionHeadingProps {
   index: string
@@ -20,7 +22,14 @@ export function SectionHeading({ index, label, title, id, aside, tone = 'dark', 
         <Reveal>
           <p className={cn('eyebrow mb-5 flex items-center gap-3', muted)}>
             <span className={tone === 'dark' ? 'text-paper' : 'text-ink-950'}>{index}</span>
-            <span aria-hidden className={cn('h-px w-8', tone === 'dark' ? 'bg-white/25' : 'bg-ink-950/25')} />
+            <motion.span
+              aria-hidden
+              className={cn('h-px w-8 origin-left', tone === 'dark' ? 'bg-white/40' : 'bg-ink-950/30')}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={viewport}
+              transition={{ duration: 1, ease: ease.cinema, delay: 0.2 }}
+            />
             {label}
           </p>
         </Reveal>

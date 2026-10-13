@@ -2,6 +2,8 @@ import { ArrowUpRight, Check, Copy } from 'lucide-react'
 import { contact } from '../content/site'
 import { useCopy } from '../hooks/useCopy'
 import { MaskedText, Reveal } from '../motion/Reveal'
+import { GlassCard } from './ui/GlassCard'
+import { Magnetic } from './ui/Magnetic'
 
 export function Contact() {
   const { copied, copy } = useCopy()
@@ -42,15 +44,17 @@ export function Contact() {
                   </span>
                   <ArrowUpRight className="size-[0.8em] shrink-0 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden />
                 </a>
+                <Magnetic>
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="glass inline-flex h-10 items-center gap-2 rounded-full px-4 text-xs text-paper"
+                  className="glass glass-sheen relative inline-flex h-10 items-center gap-2 rounded-full px-4 text-xs text-paper"
                   aria-label={emailCopied ? 'Email address copied' : 'Copy email address'}
                 >
                   {emailCopied ? <Check className="size-3.5" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
                   <span aria-live="polite">{emailCopied ? 'Copied' : 'Copy'}</span>
                 </button>
+                </Magnetic>
               </div>
             </Reveal>
           ) : (
@@ -72,10 +76,11 @@ export function Contact() {
 
           {contact.links.length > 0 && (
             <Reveal className="md:col-span-4 md:col-start-9" delay={0.1}>
-              <p className="eyebrow mb-4 text-smoke">Elsewhere</p>
-              <ul className="border-t border-white/10">
+              <GlassCard className="rounded-[var(--radius-panel)] px-6 pb-2 pt-6">
+              <p className="eyebrow mb-2 text-smoke">Elsewhere</p>
+              <ul>
                 {contact.links.map((link) => {
-                  const row = 'group flex w-full items-center justify-between gap-4 border-b border-white/10 py-4 text-left text-paper'
+                  const row = 'group flex w-full items-center justify-between gap-4 border-b border-white/10 py-4 text-left text-paper transition-[padding] duration-500 ease-(--ease-cinema) hover:px-1 [li:last-child_&]:border-0'
                   const label = <span className="text-lg tracking-tight">{link.label}</span>
                   if (!link.url) {
                     const handle = link.handle ?? ''
@@ -106,6 +111,7 @@ export function Contact() {
                   )
                 })}
               </ul>
+              </GlassCard>
             </Reveal>
           )}
         </div>

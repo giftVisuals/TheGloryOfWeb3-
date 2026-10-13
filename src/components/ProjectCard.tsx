@@ -6,6 +6,7 @@ import { cn } from '../lib/cn'
 import { categories, ratio } from '../lib/media'
 import { clipReveal, ease, fadeUp, viewport } from '../motion/tokens'
 import { ProjectMedia } from './ProjectMedia'
+import { Tilt } from './ui/Tilt'
 
 type Variant = 'featured' | 'tile' | 'split'
 
@@ -28,13 +29,15 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
   const meta = [...categories(project), project.year].filter(Boolean).join(' · ')
 
   const media = (
-    <ProjectMedia
-      project={project}
-      hovered={hovered}
-      sizes={sizes}
-      priority={variant === 'featured'}
-      className="size-full rounded-[var(--radius-frame)] shadow-frame"
-    />
+    <Tilt className="absolute inset-0 block" max={variant === 'featured' ? 1.5 : 3}>
+      <ProjectMedia
+        project={project}
+        hovered={hovered}
+        sizes={sizes}
+        priority={variant === 'featured'}
+        className="size-full rounded-[var(--radius-frame)] shadow-frame"
+      />
+    </Tilt>
   )
 
   const indicator = (

@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { process } from '../content/site'
 import { ease, viewport } from '../motion/tokens'
 import { SectionHeading } from './SectionHeading'
+import { GlassCard } from './ui/GlassCard'
 
 export function Process() {
   const track = useRef<HTMLOListElement>(null)
@@ -24,18 +25,20 @@ export function Process() {
           {process.map((step, i) => (
             <motion.li
               key={step.title}
-              className="relative border-l border-white/10 pl-6 md:border-l-0 md:pl-0 md:pt-10"
+              className="relative md:pt-10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
               transition={{ duration: 0.9, ease: ease.cinema, delay: i * 0.12 }}
             >
-              <span aria-hidden className="absolute -left-[3px] top-1 size-[5px] rounded-full bg-paper md:-top-[2px] md:left-0" />
-              <span className="block text-[clamp(3.5rem,7vw,6.5rem)] font-semibold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.35)]">
+              <span aria-hidden className="absolute -top-[2px] left-0 hidden size-[5px] rounded-full bg-paper md:block" />
+              <GlassCard className="h-full rounded-[var(--radius-panel)] p-6 hover:-translate-y-1.5 hover:border-white/15 md:p-7">
+              <span className="block text-[clamp(3.5rem,6vw,5.5rem)] font-semibold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.35)]">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 className="mt-6 text-xl font-medium tracking-tight text-paper">{step.title}</h3>
               <p className="mt-3 max-w-[30ch] text-pretty leading-relaxed text-silver">{step.description}</p>
+              </GlassCard>
             </motion.li>
           ))}
         </ol>

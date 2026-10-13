@@ -5,6 +5,7 @@ import { about } from '../content/site'
 import { asset } from '../lib/media'
 import { Reveal } from '../motion/Reveal'
 import { clipReveal, viewport } from '../motion/tokens'
+import { GlassCard } from './ui/GlassCard'
 
 export function About() {
   return (
@@ -43,15 +44,17 @@ export function About() {
           </Reveal>
 
           <Reveal className={about.portrait ? 'md:col-span-4' : 'md:col-span-5 md:col-start-8'} delay={0.1}>
-            <p className="eyebrow mb-5 text-smoke">Focus</p>
-            <ul className="border-t border-white/10">
-              {about.focus.map((item, i) => (
-                <li key={item} className="flex items-baseline justify-between gap-4 border-b border-white/10 py-4 text-paper">
-                  <span className="text-lg tracking-tight">{item}</span>
-                  <span className="eyebrow text-smoke">{String(i + 1).padStart(2, '0')}</span>
-                </li>
-              ))}
-            </ul>
+            <GlassCard className="rounded-[var(--radius-panel)] p-6 md:p-8">
+              <p className="eyebrow mb-3 text-smoke">Focus</p>
+              <ul>
+                {about.focus.map((item, i) => (
+                  <li key={item} className="group/f flex items-baseline justify-between gap-4 border-b border-white/10 py-4 text-paper last:border-0 last:pb-0">
+                    <span className="text-lg tracking-tight transition-transform duration-500 ease-(--ease-cinema) group-hover/f:translate-x-1.5">{item}</span>
+                    <span className="eyebrow text-smoke transition-colors group-hover/f:text-paper">{String(i + 1).padStart(2, '0')}</span>
+                  </li>
+                ))}
+              </ul>
+            </GlassCard>
           </Reveal>
         </div>
       </div>

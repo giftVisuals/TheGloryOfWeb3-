@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { hero, identity } from '../content/site'
 import { asset, prefersLightMedia } from '../lib/media'
 import { ease } from '../motion/tokens'
+import { Magnetic } from './ui/Magnetic'
 
 /** Entrance timing; collapses to a short, undelayed fade under reduced motion. */
 function useEnter() {
@@ -91,6 +92,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={enter(1.25, 0.9)}
             >
+              <Magnetic>
               <a
                 href="#work"
                 className="group inline-flex h-12 items-center gap-3 rounded-full bg-paper pl-6 pr-2 text-sm font-medium text-ink-950 transition-transform duration-300 hover:scale-[1.02]"
@@ -100,13 +102,16 @@ export function Hero() {
                   <ArrowDown className="size-4" aria-hidden />
                 </span>
               </a>
+              </Magnetic>
+              <Magnetic>
               <a
                 href="#contact"
-                className="group inline-flex h-12 items-center gap-2 rounded-full border border-white/15 px-5 text-sm text-paper transition-colors duration-300 hover:border-white/40 hover:bg-white/[0.04]"
+                className="glass glass-sheen group relative inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm text-paper transition-colors duration-300 hover:border-white/30"
               >
                 Get in touch
                 <ArrowUpRight className="size-4 transition-transform duration-500 ease-(--ease-cinema) group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
               </a>
+              </Magnetic>
             </motion.div>
           </div>
         </div>
@@ -178,6 +183,7 @@ function Atmosphere() {
       <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_30%,transparent_40%,rgb(4_4_4/0.85))]" />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-900 via-ink-900/70 to-transparent" />
       <FrameGuides />
+      <GlassOrbs />
     </div>
   )
 }
@@ -217,10 +223,22 @@ function Timecode() {
   }, [reduce])
 
   return (
-    <p aria-hidden className="eyebrow hidden items-center gap-3 text-silver tabular-nums sm:flex">
-      <span className="size-1.5 rounded-full bg-paper/80" />
+    <p aria-hidden className="glass eyebrow hidden items-center gap-3 rounded-full px-4 py-2 text-silver tabular-nums sm:flex">
+      <span className="relative size-1.5 rounded-full bg-paper/80"><span className="absolute inset-0 animate-ping rounded-full bg-paper/50 motion-reduce:hidden" /></span>
       <span ref={ref}>00:00:00:00</span>
       <span className="text-smoke">24 fps</span>
     </p>
+  )
+}
+
+/** Two small frosted discs drifting behind the type — glass catching the light. Desktop only. */
+function GlassOrbs() {
+  const enter = useEnter()
+  const orb = 'absolute rounded-full border border-white/10 bg-white/[0.03] shadow-[inset_0_1px_0_rgb(255_255_255/0.12),0_30px_60px_-20px_rgb(0_0_0/0.8)] backdrop-blur-md'
+  return (
+    <motion.div className="absolute inset-0 hidden lg:block" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={enter(1.2, 1.6)}>
+      <div className={`${orb} animate-float right-[14%] top-[18%] size-40 bg-[radial-gradient(circle_at_30%_25%,rgb(255_255_255/0.16),transparent_60%)]`} />
+      <div className={`${orb} animate-float-slow left-[42%] top-[12%] size-20 bg-[radial-gradient(circle_at_30%_25%,rgb(255_255_255/0.14),transparent_60%)]`} />
+    </motion.div>
   )
 }

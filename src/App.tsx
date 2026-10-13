@@ -6,6 +6,8 @@ import { Credibility } from './components/Credibility'
 import { Cursor } from './components/Cursor'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
+import { Marquee } from './components/Marquee'
+import { ScrollProgress } from './components/ScrollProgress'
 import { Nav } from './components/Nav'
 import { Process } from './components/Process'
 import { Services } from './components/Services'
@@ -28,9 +30,11 @@ export default function App() {
         <a href="#work" className="sr-only z-[100] rounded-full bg-paper px-4 py-2 text-ink-950 focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to work
         </a>
+        <ScrollProgress />
         <Nav />
         <main>
           <Hero />
+          <Marquee />
           <WorkGallery projects={projects} onOpen={open} />
           <About />
           <Services />

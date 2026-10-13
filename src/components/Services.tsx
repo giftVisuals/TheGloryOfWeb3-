@@ -31,14 +31,21 @@ export function Services() {
             return (
               <motion.li
                 key={service.title}
-                className="border-b border-ink-950/15"
+                className="group/row relative border-b border-ink-950/15"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
                 transition={{ duration: 0.8, ease: ease.cinema, delay: i * 0.05 }}
                 onPointerEnter={() => fine && setOpen(i)}
               >
-                <h3>
+                <span
+                  aria-hidden
+                  className={cn(
+                    'pointer-events-none absolute inset-0 -z-0 origin-left bg-[linear-gradient(90deg,rgb(0_0_0/0.05),rgb(0_0_0/0.0))] transition-transform duration-700 ease-(--ease-cinema)',
+                    expanded ? 'scale-x-100' : 'scale-x-0 group-hover/row:scale-x-100',
+                  )}
+                />
+                <h3 className="relative">
                   <button
                     type="button"
                     aria-expanded={expanded}
@@ -55,7 +62,7 @@ export function Services() {
                     </span>
                   </button>
                 </h3>
-                <div id={panelId} className={cn('grid transition-[grid-template-rows] duration-700 ease-(--ease-cinema)', expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}>
+                <div id={panelId} className={cn('relative grid transition-[grid-template-rows] duration-700 ease-(--ease-cinema)', expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}>
                   <div className="overflow-hidden" inert={!expanded}>
                     <p className="max-w-xl pb-8 pl-[calc(2.5rem+1rem)] leading-relaxed text-ink-600 md:pl-[calc(6rem+1rem)] md:text-lg">{service.description}</p>
                   </div>
