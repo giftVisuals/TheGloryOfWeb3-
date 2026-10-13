@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue, type Transition } from 'motion/react'
+import { useRef, useState } from 'react'
 import { hero, identity } from '../content/site'
 import { asset, prefersLightMedia } from '../lib/media'
 import { ease } from '../motion/tokens'
@@ -22,12 +22,15 @@ export function Hero() {
   const enter = useEnter()
   const section = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end start'] })
-  const wordmarkY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%'])
-  const fade = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0])
+  // A soft spring makes the scroll-out trail the scrollbar, so it reads slow and cinematic.
+  const progress = useSpring(scrollYProgress, { stiffness: 45, damping: 20, mass: 0.8 })
+  const wordmarkY = useTransform(progress, [0, 1], ['0%', reduce ? '0%' : '10%'])
+  const zoom = useTransform(progress, [0, 1], [1, reduce ? 1 : 0.92])
+  const fade = useTransform(progress, [0, 0.95], [1, reduce ? 1 : 0])
 
   return (
     <section ref={section} id="top" aria-label="Introduction" className="relative isolate flex min-h-svh flex-col overflow-hidden">
-      <Atmosphere />
+      <Atmosphere progress={progress} />
 
       <motion.div style={{ opacity: fade }} className="container-x relative flex flex-1 flex-col pb-8 pt-28 sm:pb-10 md:pt-32">
         <motion.div
@@ -37,11 +40,10 @@ export function Hero() {
           transition={enter(1.1, 1)}
         >
           <p className="eyebrow max-w-[14rem] text-silver">Portfolio — Selected edits &amp; motion work</p>
-          <Timecode />
         </motion.div>
 
         <div className="mt-auto">
-          <motion.h1 style={{ y: wordmarkY }} className="text-display select-none text-[clamp(3.4rem,17.2vw,18.5rem)] text-paper uppercase">
+          <motion.h1 style={{ y: wordmarkY, scale: zoom }} className="text-display origin-bottom-left select-none text-[clamp(3.4rem,min(17.2vw,27svh),18.5rem)] text-paper uppercase">
             <span className="sr-only">{identity.name}</span>
             {identity.wordmarkLines.map((line, li) => (
               <span key={line} aria-hidden className={`block overflow-hidden pb-[0.04em] ${li === 1 ? 'text-right' : ''}`}>
@@ -135,7 +137,7 @@ export function Hero() {
 }
 
 /** Monochrome light composition; optional muted reel layered on top. */
-function Atmosphere() {
+function Atmosphere({ progress }: { progress: MotionValue<number> }) {
   const reduce = useReducedMotion()
   const enter = useEnter()
   const [videoReady, setVideoReady] = useState(false)
@@ -183,7 +185,7 @@ function Atmosphere() {
       <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_30%,transparent_40%,rgb(4_4_4/0.85))]" />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-900 via-ink-900/70 to-transparent" />
       <FrameGuides />
-      <GlassOrbs />
+      <GlassOrbs progress={progress} />
     </div>
   )
 }
@@ -192,53 +194,63 @@ function FrameGuides() {
   const enter = useEnter()
   const corner = 'absolute size-5 border-white/20'
   return (
-    <motion.div className="absolute inset-x-[var(--gutter)] top-24 hidden h-6 md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={enter(1.3, 1.4)}>
-      <span className={`${corner} left-0 top-0 border-l border-t`} />
-      <span className={`${corner} right-0 top-0 border-r border-t`} />
+    <motion.div className="absolute inset-x-0 top-24 hidden md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={enter(1.3, 1.4)}>
+      <div className="container-x">
+        <div className="relative h-6">
+          <span className={`${corner} left-0 top-0 border-l border-t`} />
+          <span className={`${corner} right-0 top-0 border-r border-t`} />
+        </div>
+      </div>
     </motion.div>
   )
 }
 
-/** A running SMPTE-style timecode — a quiet nod to the edit suite. */
-function Timecode() {
-  const ref = useRef<HTMLSpanElement>(null)
-  const reduce = useReducedMotion()
+/** A drift of dark glass spheres at different depths. Each one floats on its own
+ *  cycle and slides at its own speed as you scroll, which gives the hero real depth. */
+const ORBS = [
+  // size, position, scroll travel (px), depth blur, float timing, visibility
+  { size: 'size-28 md:size-44', pos: 'right-[6%] top-[16%] md:right-[13%] md:top-[15%]', travel: -160, blur: '', float: 'animate-float', show: '' },
+  { size: 'size-14 md:size-20', pos: 'left-[58%] top-[30%] md:left-[44%] md:top-[11%]', travel: -90, blur: '', float: 'animate-float-slow', show: '' },
+  { size: 'size-10 md:size-14', pos: 'left-[6%] top-[46%] md:left-[7%] md:top-[56%]', travel: -40, blur: 'blur-[2px] opacity-70', float: 'animate-float', show: '' },
+  { size: 'size-28', pos: 'right-[30%] bottom-[24%]', travel: -220, blur: '', float: 'animate-float-slow', show: 'hidden lg:block' },
+  { size: 'size-9', pos: 'left-[64%] top-[40%]', travel: -120, blur: 'blur-[1px] opacity-80', float: 'animate-float', show: 'hidden md:block' },
+  { size: 'size-16', pos: 'right-[3%] top-[58%]', travel: -60, blur: 'blur-[3px] opacity-60', float: 'animate-float-slow', show: 'hidden md:block' },
+  { size: 'size-6', pos: 'left-[24%] top-[20%]', travel: -30, blur: 'blur-[2px] opacity-50', float: 'animate-float', show: 'hidden lg:block' },
+] as const
 
-  useEffect(() => {
-    if (reduce) return
-    const start = performance.now()
-    let frame = 0
-    const pad = (n: number) => String(n).padStart(2, '0')
-    const tick = (now: number) => {
-      const t = (now - start) / 1000
-      const f = Math.floor((t % 1) * 24)
-      const s = Math.floor(t) % 60
-      const m = Math.floor(t / 60) % 60
-      const h = Math.floor(t / 3600)
-      if (ref.current) ref.current.textContent = `${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)}`
-      frame = requestAnimationFrame(tick)
-    }
-    frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
-  }, [reduce])
-
+function GlassOrbs({ progress }: { progress: MotionValue<number> }) {
+  const enter = useEnter()
   return (
-    <p aria-hidden className="glass eyebrow hidden items-center gap-3 rounded-full px-4 py-2 text-silver tabular-nums sm:flex">
-      <span className="relative size-1.5 rounded-full bg-paper/80"><span className="absolute inset-0 animate-ping rounded-full bg-paper/50 motion-reduce:hidden" /></span>
-      <span ref={ref}>00:00:00:00</span>
-      <span className="text-smoke">24 fps</span>
-    </p>
+    <div className="absolute inset-0">
+      {ORBS.map((orb, i) => (
+        <Orb key={i} {...orb} progress={progress} transition={enter(1 + i * 0.12, 1.6)} delay={i * -1.7} />
+      ))}
+    </div>
   )
 }
 
-/** Two small frosted discs drifting behind the type — glass catching the light. Desktop only. */
-function GlassOrbs() {
-  const enter = useEnter()
-  const orb = 'absolute rounded-full border border-white/10 bg-white/[0.03] shadow-[inset_0_1px_0_rgb(255_255_255/0.12),0_30px_60px_-20px_rgb(0_0_0/0.8)] backdrop-blur-md'
+function Orb({
+  size,
+  pos,
+  travel,
+  blur,
+  float,
+  show,
+  progress,
+  transition,
+  delay,
+}: (typeof ORBS)[number] & { progress: MotionValue<number>; transition: Transition; delay: number }) {
+  const reduce = useReducedMotion()
+  const y = useTransform(progress, [0, 1], [0, reduce ? 0 : travel])
   return (
-    <motion.div className="absolute inset-0 hidden lg:block" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={enter(1.2, 1.6)}>
-      <div className={`${orb} animate-float right-[14%] top-[18%] size-40 bg-[radial-gradient(circle_at_30%_25%,rgb(255_255_255/0.16),transparent_60%)]`} />
-      <div className={`${orb} animate-float-slow left-[42%] top-[12%] size-20 bg-[radial-gradient(circle_at_30%_25%,rgb(255_255_255/0.14),transparent_60%)]`} />
+    <motion.div className={`absolute ${pos} ${show}`} style={{ y }} initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={transition}>
+      <div
+        className={`relative ${size} ${blur} ${float} rounded-full border border-white/[0.08] bg-[radial-gradient(circle_at_32%_26%,#3c3c3c,#151515_42%,#060606_72%)] shadow-[inset_0_1px_0_rgb(255_255_255/0.12),inset_0_-12px_24px_rgb(0_0_0/0.6),0_30px_60px_-20px_rgb(0_0_0/0.9)]`}
+        style={{ animationDelay: `${delay}s` }}
+      >
+        {/* Specular highlight — the "glass" catching the light. */}
+        <span className="absolute left-[22%] top-[16%] h-[18%] w-[28%] rotate-[-25deg] rounded-full bg-white/[0.14] blur-[2px]" />
+      </div>
     </motion.div>
   )
 }

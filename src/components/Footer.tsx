@@ -11,7 +11,6 @@ export function Footer() {
         <div aria-hidden className="rule-fade" />
         <div className="flex flex-col gap-6 py-8 text-sm text-smoke md:flex-row md:items-center md:justify-between">
           <p className="flex items-center gap-2.5 text-paper">
-            <span aria-hidden className="block size-2 rounded-full bg-paper" />
             {identity.name}
             <span className="text-smoke">— {identity.roles.join(', ')}</span>
           </p>

@@ -96,10 +96,7 @@ export function Nav() {
           scrolled || open ? 'glass glass-sheen max-w-3xl bg-ink-900/80!' : 'max-w-[108rem] border-transparent bg-transparent shadow-none',
         )}
       >
-        <a href="#top" className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-paper" aria-label={`${identity.name} — back to top`}>
-          <span aria-hidden className="relative block size-2 rounded-full bg-paper transition-transform duration-500 group-hover:scale-150">
-            <span className="absolute inset-0 animate-ping rounded-full bg-paper/60 motion-reduce:hidden" />
-          </span>
+        <a href="#top" className="text-sm font-semibold tracking-tight text-paper" aria-label={`${identity.name} — back to top`}>
           {identity.name}
         </a>
 
