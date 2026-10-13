@@ -1,8 +1,10 @@
 import { ArrowUp } from 'lucide-react'
 import { contact, identity } from '../content/site'
+import { useCopy } from '../hooks/useCopy'
 
 export function Footer() {
   const year = new Date().getFullYear()
+  const { copied, copy } = useCopy()
   return (
     <footer className="relative">
       <div className="container-x">
@@ -16,10 +18,21 @@ export function Footer() {
           {contact.links.length > 0 && (
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
               {contact.links.map((link) => (
-                <li key={link.url}>
-                  <a href={link.url} target="_blank" rel="noreferrer" className="transition-colors hover:text-paper">
-                    {link.label}
-                  </a>
+                <li key={link.label}>
+                  {link.url ? (
+                    <a href={link.url} target="_blank" rel="noreferrer" className="transition-colors hover:text-paper">
+                      {link.label}
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => copy(link.handle ?? '')}
+                      className="transition-colors hover:text-paper"
+                      aria-label={`Copy ${link.label} username ${link.handle}`}
+                    >
+                      <span aria-live="polite">{copied === link.handle ? `${link.label} copied` : `${link.label}: ${link.handle}`}</span>
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>

@@ -92,7 +92,9 @@ export const contact = {
   email: 'Aweglory388@gmail.com',
   /** Only real, working profiles. Shown in the contact section and footer. */
   links: [
-    // { label: 'X', url: 'https://x.com/yourhandle', handle: '@yourhandle' },
-    // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/yourprofile' },
+    { label: 'X', url: 'https://x.com/TheGloryofweb3', handle: '@TheGloryofweb3' },
+    { label: 'Telegram', url: 'https://t.me/TheGlory0fweb3', handle: '@TheGlory0fweb3' },
+    // Discord usernames have no public profile URL, so this one copies the username.
+    { label: 'Discord', handle: 'thegloryofweb3' },
   ] as ContactLink[],
 }

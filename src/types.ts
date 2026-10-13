@@ -60,7 +60,8 @@ export interface Testimonial {
 
 export interface ContactLink {
   label: string
-  url: string
-  /** Shown next to the label, e.g. "@handle". */
+  /** Profile URL. Leave out for usernames without a public link (e.g. Discord): the handle is copied on click instead. */
+  url?: string
+  /** Shown next to the label, e.g. "@handle". Required when there is no url. */
   handle?: string
 }

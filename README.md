@@ -84,7 +84,7 @@ Everything else is in **`src/content/site.ts`**:
 - `services`: add, remove or reorder freely. No prices are shown.
 - `process`: the four workflow steps.
 - `credibility`: testimonials and collaborators. **Disabled and empty by default.** Set `enabled: true` only with real, approved quotes and names.
-- `contact`: **set `email` to your public business email** and add real profile links (X, LinkedIn…). Until then, the contact section says details are coming soon.
+- `contact`: public email and social links. A link with a `url` opens in a new tab. An entry with only a `handle` (e.g. Discord) copies the username when clicked.
 
 ### Contact form
 

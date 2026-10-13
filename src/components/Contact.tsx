@@ -1,20 +1,15 @@
 import { ArrowUpRight, Check, Copy } from 'lucide-react'
-import { useState } from 'react'
 import { contact } from '../content/site'
+import { useCopy } from '../hooks/useCopy'
 import { MaskedText, Reveal } from '../motion/Reveal'
 
 export function Contact() {
-  const [copied, setCopied] = useState(false)
+  const { copied, copy } = useCopy()
   const hasChannels = Boolean(contact.email) || contact.links.length > 0
+  const emailCopied = copied === contact.email
 
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(contact.email)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 2000)
-    } catch {
-      window.location.href = `mailto:${contact.email}`
-    }
+  const copyEmail = async () => {
+    if (!(await copy(contact.email))) window.location.href = `mailto:${contact.email}`
   }
 
   return (
@@ -49,12 +44,12 @@ export function Contact() {
                 </a>
                 <button
                   type="button"
-                  onClick={copy}
+                  onClick={copyEmail}
                   className="glass inline-flex h-10 items-center gap-2 rounded-full px-4 text-xs text-paper"
-                  aria-label={copied ? 'Email address copied' : 'Copy email address'}
+                  aria-label={emailCopied ? 'Email address copied' : 'Copy email address'}
                 >
-                  {copied ? <Check className="size-3.5" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
-                  <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
+                  {emailCopied ? <Check className="size-3.5" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
+                  <span aria-live="polite">{emailCopied ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
             </Reveal>
@@ -79,23 +74,37 @@ export function Contact() {
             <Reveal className="md:col-span-4 md:col-start-9" delay={0.1}>
               <p className="eyebrow mb-4 text-smoke">Elsewhere</p>
               <ul className="border-t border-white/10">
-                {contact.links.map((link) => (
-                  <li key={link.url}>
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group flex items-center justify-between gap-4 border-b border-white/10 py-4 text-paper"
-                    >
-                      <span className="text-lg tracking-tight">{link.label}</span>
-                      <span className="flex items-center gap-2 text-sm text-silver transition-colors group-hover:text-paper">
-                        {link.handle}
-                        <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
-                      </span>
-                      <span className="sr-only">(opens in a new tab)</span>
-                    </a>
-                  </li>
-                ))}
+                {contact.links.map((link) => {
+                  const row = 'group flex w-full items-center justify-between gap-4 border-b border-white/10 py-4 text-left text-paper'
+                  const label = <span className="text-lg tracking-tight">{link.label}</span>
+                  if (!link.url) {
+                    const handle = link.handle ?? ''
+                    const done = copied === handle
+                    return (
+                      <li key={link.label}>
+                        <button type="button" onClick={() => copy(handle)} className={row} aria-label={`Copy ${link.label} username ${handle}`}>
+                          {label}
+                          <span className="flex items-center gap-2 text-sm text-silver transition-colors group-hover:text-paper">
+                            <span aria-live="polite">{done ? 'Copied' : handle}</span>
+                            {done ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}
+                          </span>
+                        </button>
+                      </li>
+                    )
+                  }
+                  return (
+                    <li key={link.label}>
+                      <a href={link.url} target="_blank" rel="noreferrer" className={row}>
+                        {label}
+                        <span className="flex items-center gap-2 text-sm text-silver transition-colors group-hover:text-paper">
+                          {link.handle}
+                          <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                        </span>
+                        <span className="sr-only">(opens in a new tab)</span>
+                      </a>
+                    </li>
+                  )
+                })}
               </ul>
             </Reveal>
           )}
