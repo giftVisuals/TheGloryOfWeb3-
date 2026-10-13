@@ -89,7 +89,7 @@ export const credibility = {
 export const contact = {
   heading: 'Have a story worth bringing to life?',
   /** Your public business email, e.g. "hello@yourdomain.com". Empty = hidden. */
-  email: '',
+  email: 'Aweglory388@gmail.com',
   /** Only real, working profiles. Shown in the contact section and footer. */
   links: [
     // { label: 'X', url: 'https://x.com/yourhandle', handle: '@yourhandle' },
