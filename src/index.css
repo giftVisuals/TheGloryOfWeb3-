@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+/* ── Design tokens ─────────────────────────────────────────────────────── */
+@theme {
+  /* Surfaces: ~70% of the interface lives in this near-black range. */
+  --color-ink-950: #040404;
+  --color-ink-900: #070707;
+  --color-ink-850: #0b0b0b;
+  --color-ink-800: #111111;
+  --color-ink-700: #191919;
+  --color-ink-600: #242424;
+  /* Graphite → silver for secondary type, rules and reflections. */
+  --color-graphite: #3d3d3d;
+  --color-smoke: #6f6f6f;
+  --color-silver: #a9a9a6;
+  --color-fog: #d6d5d0;
+  /* Off-white family: ~30% — type, the inverted section, highlights. */
+  --color-bone: #f1f0eb;
+  --color-paper: #fafaf7;
+
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --radius-frame: 1.125rem;
+  --radius-panel: 1.5rem;
+
+  --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-glide: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-frame: 0 40px 80px -40px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+:root {
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --nav-h: 4.5rem;
+  color-scheme: dark;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    background: var(--color-ink-900);
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    min-height: 100svh;
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgb(255 255 255 / 0.05), transparent 60%),
+      linear-gradient(180deg, var(--color-ink-900), var(--color-ink-950) 40%, var(--color-ink-850) 100%);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-bone);
+    color: var(--color-ink-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .surface-light :focus-visible {
+    outline-color: var(--color-ink-950);
+  }
+  section[id] {
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+/* ── Utilities ─────────────────────────────────────────────────────────── */
+@utility container-x {
+  width: 100%;
+  max-width: 108rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Restrained glass: translucent charcoal, fine border, internal highlight. */
+@utility glass {
+  background: linear-gradient(180deg, rgb(30 30 30 / 0.55), rgb(12 12 12 / 0.5));
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+  backdrop-filter: blur(18px) saturate(115%);
+  border: 1px solid rgb(255 255 255 / 0.09);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.07),
+    0 24px 60px -28px rgb(0 0 0 / 0.85);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@utility text-display {
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+}
+
+/* Hairline that fades out at both ends. */
+@utility rule-fade {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.16) 20%, rgb(255 255 255 / 0.16) 80%, transparent);
+}
+
+/* ── Film grain: static, one layer, GPU-cheap. ─────────────────────────── */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Hero atmosphere ───────────────────────────────────────────────────── */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 3%, 0) scale(1.08);
+  }
+}
+@keyframes sweep {
+  0% {
+    transform: translate3d(-60%, 0, 0) rotate(18deg);
+  }
+  100% {
+    transform: translate3d(160%, 0, 0) rotate(18deg);
+  }
+}
+@keyframes cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(220%);
+  }
+}
+.animate-drift {
+  animation: drift 22s var(--ease-glide) infinite;
+}
+.animate-drift-slow {
+  animation: drift 34s var(--ease-glide) infinite reverse;
+}
+.animate-sweep {
+  animation: sweep 14s var(--ease-glide) infinite;
+}
+.animate-cue {
+  animation: cue 2.4s var(--ease-cinema) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift,
+  .animate-drift-slow,
+  .animate-sweep,
+  .animate-cue {
+    animation: none;
+  }
+}
+
+/* ── Range inputs (player scrubber + volume) ───────────────────────────── */
+.range {
+  --p: 0%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  height: 1.25rem;
+  cursor: pointer;
+}
+.range::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--color-paper) var(--p), rgb(255 255 255 / 0.2) var(--p));
+}
+.range::-moz-range-track {
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--color-paper) var(--p), rgb(255 255 255 / 0.2) var(--p));
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 0.12);
+  transition: transform 0.2s var(--ease-cinema);
+}
+.range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-paper);
+}
+.range:hover::-webkit-slider-thumb,
+.range:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.25);
+}
+.range:focus-visible {
+  outline-offset: 2px;
+}
