@@ -38,7 +38,8 @@ export const projects: Project[] = [
     thumbnail: 'media/trading-platform-thumb.jpg',
     previewUrl: 'media/trading-platform-preview.mp4',
     previewWebmUrl: 'media/trading-platform-preview.webm',
-    videoUrl: 'https://drive.google.com/file/d/1871mjNV8y4gWkujDplfXCzhaEg5lhxvu/view?usp=drivesdk',
+    videoUrl: 'media/trading-platform-film.mp4',
+    // Backup copy: https://drive.google.com/file/d/1871mjNV8y4gWkujDplfXCzhaEg5lhxvu/view
     aspectRatio: '16:9',
     featured: true,
     externalUrl: 'https://x.com/olympusappX/status/2108161616722497859',
@@ -56,7 +57,8 @@ export const projects: Project[] = [
     thumbnail: 'media/reverse-copy-thumb.jpg',
     previewUrl: 'media/reverse-copy-preview.mp4',
     previewWebmUrl: 'media/reverse-copy-preview.webm',
-    videoUrl: 'https://drive.google.com/file/d/1VCBn_lSM28Nu-mNZ1sNhGQa7TEI7p_Le/view?usp=drivesdk',
+    videoUrl: 'media/reverse-copy-film.mp4',
+    // Backup copy: https://drive.google.com/file/d/1VCBn_lSM28Nu-mNZ1sNhGQa7TEI7p_Le/view
     aspectRatio: '9:16',
     externalUrl: 'https://vm.tiktok.com/ZGdCPLLX5/',
     externalLabel: 'Watch on TikTok',
@@ -92,7 +94,8 @@ export const projects: Project[] = [
     thumbnail: 'media/dlmm-copy-thumb.jpg',
     previewUrl: 'media/dlmm-copy-preview.mp4',
     previewWebmUrl: 'media/dlmm-copy-preview.webm',
-    videoUrl: 'https://drive.google.com/file/d/1A0RCcZqpEOyRgkTBfP0sEGeHvlcYnEmz/view?usp=drivesdk',
+    videoUrl: 'media/dlmm-copy-film.mp4',
+    // Backup copy: https://drive.google.com/file/d/1A0RCcZqpEOyRgkTBfP0sEGeHvlcYnEmz/view
     aspectRatio: '16:9',
     externalUrl: 'https://x.com/SOL_Decoder/status/2099898255471751619',
     externalLabel: 'Watch the post on X',
