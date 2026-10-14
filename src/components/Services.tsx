@@ -6,6 +6,7 @@ import { useFinePointer } from '../hooks/useMediaQuery'
 import { cn } from '../lib/cn'
 import { ease, viewport } from '../motion/tokens'
 import { SectionHeading } from './SectionHeading'
+import { Turnaround } from './Turnaround'
 
 /** The inverted, off-white chapter — the 30% in the 70/30 balance. */
 export function Services() {
@@ -23,6 +24,8 @@ export function Services() {
           tone="light"
           aside={<p className="max-w-xs text-sm leading-relaxed text-ink-600/80 md:text-right">Engagements are shaped around the story, the audience and where the video will live.</p>}
         />
+
+        <Turnaround />
 
         <ul className="mt-14 border-t border-ink-950/15 md:mt-20">
           {services.map((service, i) => {
@@ -56,6 +59,11 @@ export function Services() {
                     <span className="eyebrow text-ink-600/60">{String(i + 1).padStart(2, '0')}</span>
                     <span className={cn('text-[clamp(1.6rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.04em] transition-transform duration-700 ease-(--ease-cinema)', expanded && 'md:translate-x-3')}>
                       {service.title}
+                      {service.turnaround && (
+                        <span className="eyebrow ml-3 inline-flex translate-y-[-0.35em] items-center rounded-full bg-ink-950 px-2.5 py-1 align-middle text-[0.6rem] tracking-[0.14em] text-bone md:ml-4">
+                          {service.turnaround}
+                        </span>
+                      )}
                     </span>
                     <span className={cn('grid size-10 place-items-center rounded-full border transition-all duration-500 ease-(--ease-cinema)', expanded ? 'rotate-45 border-ink-950 bg-ink-950 text-bone' : 'border-ink-950/20')}>
                       <Plus className="size-4" aria-hidden />

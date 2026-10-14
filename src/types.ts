@@ -47,6 +47,15 @@ export interface Project {
 export interface Service {
   title: string
   description: string
+  /** Optional delivery-time tag shown beside the title, e.g. "Under 2 hrs". */
+  turnaround?: string
+}
+
+export interface Turnaround {
+  /** Upper bound in hours; animated as "< N hrs". */
+  hours: number
+  service: string
+  detail?: string
 }
 
 export interface ProcessStep {

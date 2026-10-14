@@ -1,4 +1,4 @@
-import type { ContactLink, ProcessStep, Service, Testimonial } from '../types'
+import type { ContactLink, ProcessStep, Service, Testimonial, Turnaround } from '../types'
 
 /**
  * ─────────────────────────────────────────────────────────────────────────
@@ -49,6 +49,7 @@ export const services: Service[] = [
   {
     title: 'Motion Graphics',
     description: 'Kinetic typography, animated interfaces and graphic systems that explain and elevate without noise.',
+    turnaround: 'Under 2 hrs',
   },
   {
     title: 'Web3 & Crypto Content',
@@ -69,8 +70,18 @@ export const services: Service[] = [
   {
     title: 'AI UGC',
     description: 'Ultra-realistic AI creator videos — scripted, generated, voiced and edited to feel native to TikTok, Reels and Shorts, at a fraction of a shoot.',
+    turnaround: 'Under 4 hrs',
   },
 ]
+
+/** Delivery times, shown as large animated figures in the Services section. */
+export const turnaround = {
+  label: 'Turnaround',
+  items: [
+    { hours: 2, service: 'Motion design', detail: 'From brief to delivered file.' },
+    { hours: 4, service: 'Ultra-realistic AI UGC + motion design', detail: 'AI creator, voice, edit and motion — delivered.' },
+  ] as Turnaround[],
+}
 
 export const process: ProcessStep[] = [
   { title: 'Discovery', description: 'Understand the concept, audience, objective and creative direction.' },
