@@ -65,4 +65,20 @@ export const projects: Project[] = [
       { label: 'Format', value: 'Vertical 9:16' },
     ],
   },
+  {
+    id: 'copy-trading-ai-ugc',
+    title: 'Copy Trading — AI UGC Explainer',
+    category: ['AI UGC', 'Web3', 'Explainer videos'],
+    role: 'AI character · Edit · Motion design · Sound design · Music · Voiceover',
+    description:
+      'An ultra-realistic AI creator opens on a relatable frustration, holds up her phone, and the camera pushes straight through the screen into the product. From there a guided walkthrough covers every copy-trading setting — ratio and position sizing, automatic exits and loss protection — so a viewer can set it up in one watch.',
+    year: 2026,
+    thumbnail: 'media/copy-trade-ugc-thumb.jpg',
+    previewUrl: 'media/copy-trade-ugc-preview.mp4',
+    previewWebmUrl: 'media/copy-trade-ugc-preview.webm',
+    videoUrl: 'https://drive.google.com/file/d/1J54PaICk302C1-Xq-Od8W-q7_UxT09U7/view?usp=drivesdk',
+    aspectRatio: '16:9',
+    externalUrl: 'https://x.com/olympusappX/status/2101298350683533430',
+    externalLabel: 'Watch the post on X',
+  },
 ]
