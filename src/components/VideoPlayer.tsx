@@ -46,7 +46,7 @@ function Frame({ aspect, fill, frameRef, className, children, ...dom }: FramePro
       ref={frameRef}
       {...dom}
       className={cn('relative mx-auto w-full overflow-hidden rounded-[var(--radius-frame)] bg-ink-950 shadow-frame', className)}
-      style={fill ? { width: '100%', height: '100%' } : { aspectRatio: aspect, maxWidth: `calc(min(76svh, 100%) * ${aspect})` }}
+      style={fill ? { width: '100%', height: '100%' } : { aspectRatio: aspect, maxWidth: `min(100%, calc(76svh * ${aspect}))` }}
     >
       {children}
     </div>

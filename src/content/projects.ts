@@ -45,4 +45,24 @@ export const projects: Project[] = [
     externalLabel: 'Watch the post on X',
     details: [{ label: 'Duration', value: '1:02' }],
   },
+  {
+    id: 'reverse-copy-trade-vertical',
+    title: 'Reverse Copy Trade',
+    category: ['Web3', 'Social media content', 'Motion graphics'],
+    role: 'Edit · Motion design · 3D animation · Sound design · Music · Voiceover',
+    description:
+      'A 32-second vertical launch for a contrarian trading feature: when a trader buys YES, your setup takes NO. Bold kinetic headlines, a YES-to-NO light trail, a glowing 3D temple and word-by-word captions turn a tricky concept into a scroll-stopping explainer, then walk through the setup in three moves.',
+    year: 2026,
+    thumbnail: 'media/reverse-copy-thumb.jpg',
+    previewUrl: 'media/reverse-copy-preview.mp4',
+    previewWebmUrl: 'media/reverse-copy-preview.webm',
+    videoUrl: 'https://drive.google.com/file/d/1VCBn_lSM28Nu-mNZ1sNhGQa7TEI7p_Le/view?usp=drivesdk',
+    aspectRatio: '9:16',
+    externalUrl: 'https://vm.tiktok.com/ZGdCPLLX5/',
+    externalLabel: 'Watch on TikTok',
+    details: [
+      { label: 'Duration', value: '0:32' },
+      { label: 'Format', value: 'Vertical 9:16' },
+    ],
+  },
 ]
