@@ -39,7 +39,8 @@ function compose(list: Project[]): Row[] {
   for (const p of rest) {
     bucket.push(p)
     sum += ratio(p.aspectRatio)
-    if (sum >= 2.4 || bucket.length === 3) flush()
+    // ~2.2 total ratio per row keeps portrait work readable (portrait + landscape = one row).
+    if (sum >= 2.2 || bucket.length === 3) flush()
   }
   flush()
   return rows
@@ -52,10 +53,11 @@ interface WorkGalleryProps {
 
 export function WorkGallery({ projects, onOpen }: WorkGalleryProps) {
   const [filter, setFilter] = useState<string | null>(null)
-  const allCategories = useMemo(
-    () => [...new Set(projects.filter((p) => !p.sample).flatMap(categories))],
-    [projects],
-  )
+  // Only categories that actually narrow the list (one shared by every project is a no-op).
+  const allCategories = useMemo(() => {
+    const real = projects.filter((p) => !p.sample)
+    return [...new Set(real.flatMap(categories))].filter((c) => real.filter((p) => categories(p).includes(c)).length < real.length)
+  }, [projects])
   const showFilter = allCategories.length >= 2 && projects.length >= 4
   const visible = filter ? projects.filter((p) => categories(p).includes(filter)) : projects
   const rows = useMemo(() => compose(visible), [visible])

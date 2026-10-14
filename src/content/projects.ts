@@ -81,4 +81,21 @@ export const projects: Project[] = [
     externalUrl: 'https://x.com/olympusappX/status/2101298350683533430',
     externalLabel: 'Watch the post on X',
   },
+  {
+    id: 'dlmm-copy-trading-walkthrough',
+    title: 'DLMM Copy Trading Walkthrough',
+    category: ['Web3', 'Product video', 'Motion graphics'],
+    role: 'Edit · Motion design · Sound design · Music · Voiceover',
+    description:
+      'A one-minute walkthrough for a Solana DLMM copy-trading tool, built in a gold-and-deep-green palette to match the brand. A scrambled "Guesswork?" resolves into "Copy with confidence", then the edit follows a real user path — finding top wallets, inspecting their track record in the wallet explorer and dialling in sizing and strategy — with gold kinetic callouts guiding every step, closing on a clean logo reveal.',
+    year: 2026,
+    thumbnail: 'media/dlmm-copy-thumb.jpg',
+    previewUrl: 'media/dlmm-copy-preview.mp4',
+    previewWebmUrl: 'media/dlmm-copy-preview.webm',
+    videoUrl: 'https://drive.google.com/file/d/1A0RCcZqpEOyRgkTBfP0sEGeHvlcYnEmz/view?usp=drivesdk',
+    aspectRatio: '16:9',
+    externalUrl: 'https://x.com/SOL_Decoder/status/2099898255471751619',
+    externalLabel: 'Watch the post on X',
+    details: [{ label: 'Duration', value: '0:57' }],
+  },
 ]
