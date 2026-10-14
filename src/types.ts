@@ -38,6 +38,8 @@ export interface Project {
   details?: ProjectDetail[]
   /** Marks a layout demonstration slot. Rendered with a visible "Sample" label. Delete once real work is added. */
   sample?: boolean
+  /** Work made with generative AI (e.g. AI UGC with synthetic people). Shows an "AI-generated" label. */
+  aiGenerated?: boolean
   /** Keep a project in the file but out of the public site. */
   hidden?: boolean
 }

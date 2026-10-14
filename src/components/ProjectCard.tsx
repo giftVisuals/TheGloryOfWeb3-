@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState, type CSSProperties, type PointerEvent } from 'react'
 import type { Project } from '../types'
@@ -27,6 +27,7 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
   const [hovered, setHovered] = useState(false)
   const aspect = ratio(project.aspectRatio)
   const meta = [...categories(project), project.year].filter(Boolean).join(' · ')
+  const badge = project.sample ? 'Sample slot' : project.aiGenerated ? 'AI-generated' : null
 
   const media = (
     <Tilt className="absolute inset-0 block" max={variant === 'featured' ? 1.5 : 3}>
@@ -63,7 +64,7 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
           {project.role}
         </span>
       </span>
-      {project.sample && <SampleBadge />}
+      {badge && <Badge label={badge} ai={!project.sample} />}
     </span>
   )
 
@@ -75,7 +76,7 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
     onFocus: () => setHovered(true),
     onBlur: () => setHovered(false),
     'data-cursor': 'Play',
-    'aria-label': `Open project: ${project.title}${project.sample ? ' (sample slot)' : ''}`,
+    'aria-label': `Open project: ${project.title}${badge ? ` (${badge})` : ''}`,
     className: 'group block w-full text-left rounded-[var(--radius-frame)]',
   }
 
@@ -99,9 +100,9 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
                 {project.role}
               </span>
             </span>
-            {project.sample && (
+            {badge && (
               <span className="absolute left-4 top-4 hidden md:block">
-                <SampleBadge />
+                <Badge label={badge} ai={!project.sample} />
               </span>
             )}
             {indicator}
@@ -144,7 +145,7 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
                 <ArrowUpRight className="size-4" aria-hidden />
               </span>
             </button>
-            {project.sample && <SampleBadge />}
+            {badge && <Badge label={badge} ai={!project.sample} />}
           </div>
         </motion.div>
       </motion.article>
@@ -171,10 +172,17 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
   )
 }
 
-function SampleBadge() {
+export function Badge({ label, ai }: { label: string; ai?: boolean }) {
   return (
-    <span className="eyebrow inline-flex shrink-0 items-center gap-2 rounded-full border border-dashed border-white/25 bg-ink-950/60 px-3 py-1.5 text-fog">
-      Sample slot
+    <span
+      className={
+        ai
+          ? 'glass eyebrow inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-paper'
+          : 'eyebrow inline-flex shrink-0 items-center gap-2 rounded-full border border-dashed border-white/25 bg-ink-950/60 px-3 py-1.5 text-fog'
+      }
+    >
+      {ai && <Sparkles className="size-3" aria-hidden />}
+      {label}
     </span>
   )
 }

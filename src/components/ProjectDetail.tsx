@@ -6,6 +6,7 @@ import { useFocusTrap } from '../hooks/useFocusTrap'
 import { useScrollLock } from '../hooks/useScrollLock'
 import { categories, ratio, resolvePoster, resolveVideo } from '../lib/media'
 import { ease } from '../motion/tokens'
+import { Badge } from './ProjectCard'
 import { VideoPlayer } from './VideoPlayer'
 
 interface ProjectDetailProps {
@@ -94,7 +95,11 @@ export default function ProjectDetail({ project, projects, onClose, onNavigate }
           <div className="md:col-span-7">
             <p className="eyebrow mb-4 text-smoke">
               {categories(project).join(' · ')}
-              {project.sample && <span className="ml-3 rounded-full border border-dashed border-white/25 px-2.5 py-1 text-fog">Sample slot</span>}
+              {(project.sample || project.aiGenerated) && (
+                <span className="ml-3 inline-block align-middle">
+                  <Badge label={project.sample ? 'Sample slot' : 'AI-generated'} ai={!project.sample} />
+                </span>
+              )}
             </p>
             <h2 id="project-title" className="text-display text-[clamp(2.5rem,6vw,5.5rem)] text-paper">
               {project.title}

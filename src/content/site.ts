@@ -66,6 +66,10 @@ export const services: Service[] = [
     title: 'Social Media Editing',
     description: 'Vertical and square cuts engineered for the first three seconds — captions, hooks and rhythm included.',
   },
+  {
+    title: 'AI UGC',
+    description: 'Ultra-realistic AI creator videos — scripted, generated, voiced and edited to feel native to TikTok, Reels and Shorts, at a fraction of a shoot.',
+  },
 ]
 
 export const process: ProcessStep[] = [
