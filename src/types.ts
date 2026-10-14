@@ -25,6 +25,8 @@ export interface Project {
   videoUrl?: string
   /** Optional short, lightweight clip used for the hover preview in the gallery (direct file only). */
   previewUrl?: string
+  /** Optional WebM copy of the preview. Browsers pick whichever format they support. */
+  previewWebmUrl?: string
   /** Native ratio of the video. Defaults to "16:9". Thumbnails are never cropped to fit a template. */
   aspectRatio?: AspectRatio
   /** Featured projects are presented full-width at the top of the gallery. */

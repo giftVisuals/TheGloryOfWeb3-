@@ -98,11 +98,19 @@ export function resolvePoster(project: Pick<Project, 'thumbnail' | 'videoUrl'>):
   return undefined
 }
 
-/** Direct-file source for the gallery hover preview, if one is available. */
-export function resolvePreview(project: Pick<Project, 'previewUrl' | 'videoUrl'>): string | undefined {
-  if (project.previewUrl) return asset(project.previewUrl)
+/** Direct-file sources for the gallery hover preview (WebM first when supplied), if any. */
+export function resolvePreview(project: Pick<Project, 'previewUrl' | 'previewWebmUrl' | 'videoUrl'>): string[] {
+  const sources: string[] = []
+  if (project.previewWebmUrl) sources.push(asset(project.previewWebmUrl))
+  if (project.previewUrl) sources.push(asset(project.previewUrl))
+  if (sources.length) return sources
   const source = resolveVideo(project.videoUrl)
-  return source.kind === 'file' ? source.src : undefined
+  return source.kind === 'file' ? [source.src] : []
+}
+
+const MIME: Record<string, string> = { webm: 'video/webm', mp4: 'video/mp4', m4v: 'video/mp4', mov: 'video/quicktime', ogv: 'video/ogg', ogg: 'video/ogg' }
+export function videoMime(url: string): string | undefined {
+  return MIME[url.split(/[?#]/)[0].split('.').pop()?.toLowerCase() ?? '']
 }
 
 export function ratio(aspect?: AspectRatio): number {

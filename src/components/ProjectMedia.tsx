@@ -3,7 +3,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 import type { Project } from '../types'
 import { useFinePointer } from '../hooks/useMediaQuery'
 import { cn } from '../lib/cn'
-import { prefersLightMedia, resolvePoster, resolvePreview } from '../lib/media'
+import { prefersLightMedia, resolvePoster, resolvePreview, videoMime } from '../lib/media'
 import { claimPlayback, releasePlayback } from '../lib/playback'
 import { MediaArt } from './MediaArt'
 
@@ -30,7 +30,7 @@ export function ProjectMedia({ project, hovered, sizes, priority, className }: P
   const fine = useFinePointer()
   const reduce = useReducedMotion()
   const poster = resolvePoster(project)
-  const previewSrc = resolvePreview(project)
+  const previewSources = resolvePreview(project)
   const [posterFailed, setPosterFailed] = useState(false)
   const [posterLoaded, setPosterLoaded] = useState(false)
   const [inView, setInView] = useState(false)
@@ -45,7 +45,7 @@ export function ProjectMedia({ project, hovered, sizes, priority, className }: P
     return () => observer.disconnect()
   }, [])
 
-  const canPreview = Boolean(previewSrc) && !previewFailed && !reduce && !prefersLightMedia()
+  const canPreview = previewSources.length > 0 && !previewFailed && !reduce && !prefersLightMedia()
   const wantsPlay = canPreview && (fine ? hovered && inView : inView)
   const [mounted, setMounted] = useState(false)
   if (wantsPlay && !mounted) setMounted(true)
@@ -87,10 +87,9 @@ export function ProjectMedia({ project, hovered, sizes, priority, className }: P
           />
         )}
 
-        {mounted && previewSrc && (
+        {mounted && previewSources.length > 0 && (
           <video
             ref={video}
-            src={previewSrc}
             muted
             loop
             playsInline
@@ -98,9 +97,13 @@ export function ProjectMedia({ project, hovered, sizes, priority, className }: P
             aria-hidden
             onPlaying={() => setPlaying(true)}
             onPause={() => setPlaying(false)}
-            onError={() => setPreviewFailed(true)}
             className={cn('absolute inset-0 size-full object-cover transition-opacity duration-700', playing ? 'opacity-100' : 'opacity-0')}
-          />
+          >
+            {previewSources.map((src, i) => (
+              // Only the last source failing means no format worked.
+              <source key={src} src={src} type={videoMime(src)} onError={i === previewSources.length - 1 ? () => setPreviewFailed(true) : undefined} />
+            ))}
+          </video>
         )}
       </div>
 

@@ -25,29 +25,24 @@ import type { Project } from '../types'
  *
  *  See README.md → "Adding your work" for the full walkthrough.
  *
- *  The two entries below are SAMPLE SLOTS that only demonstrate the layout.
- *  They contain no client work. Replace or delete them.
  */
 export const projects: Project[] = [
   {
-    id: 'sample-featured',
-    sample: true,
-    title: 'Featured Project',
-    category: 'Placeholder',
-    role: 'Edit · Motion design',
+    id: 'trading-platform-product-film',
+    title: 'Trading Platform Launch Film',
+    category: ['Web3', 'Product video', 'Motion graphics'],
+    role: 'Edit · Motion design · 3D animation · Sound design · Music · Voiceover',
     description:
-      'Placeholder for your strongest landscape piece. Featured projects open the gallery at full cinematic width. Replace this entry in src/content/projects.ts.',
+      'A 60-second launch film for a Polymarket trading-automation platform. Every feature — copy trading, LP automation, Autobond, multi-wallet strategies, perps and combos — gets its own chapter, built from kinetic headlines, animated counters, live-feeling UI motion and a glowing 3D wireframe temple, all carried by original voiceover, music and sound design.',
+    year: 2026,
+    thumbnail: 'media/trading-platform-thumb.jpg',
+    previewUrl: 'media/trading-platform-preview.mp4',
+    previewWebmUrl: 'media/trading-platform-preview.webm',
+    videoUrl: 'https://drive.google.com/file/d/1871mjNV8y4gWkujDplfXCzhaEg5lhxvu/view?usp=drivesdk',
     aspectRatio: '16:9',
     featured: true,
-  },
-  {
-    id: 'sample-vertical',
-    sample: true,
-    title: 'Vertical Cut',
-    category: 'Placeholder',
-    role: 'Edit',
-    description:
-      'Placeholder for a 9:16 social edit. Portrait work keeps its native ratio and is composed beside its story instead of being cropped. Replace this entry in src/content/projects.ts.',
-    aspectRatio: '9:16',
+    externalUrl: 'https://x.com/olympusappX/status/2108161616722497859',
+    externalLabel: 'Watch the post on X',
+    details: [{ label: 'Duration', value: '1:02' }],
   },
 ]

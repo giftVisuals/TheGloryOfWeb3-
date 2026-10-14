@@ -85,13 +85,13 @@ export function ProjectCard({ project, index, total, variant, onOpen, sizes, cla
         <button {...buttonProps}>
           <span className="relative block" style={{ aspectRatio: aspect }}>
             {media}
-            <span className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-1/2 rounded-b-[var(--radius-frame)] bg-gradient-to-t from-ink-950/85 to-transparent md:block" />
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[65%] rounded-b-[var(--radius-frame)] bg-gradient-to-t from-ink-950 via-ink-950/75 to-transparent md:block" />
             <span className="pointer-events-none absolute bottom-0 left-0 hidden max-w-2xl p-8 md:block lg:p-12">
               <span className="eyebrow mb-3 flex items-center gap-3 text-fog">
                 <span className="rounded-full border border-white/20 px-2.5 py-1">Featured</span>
                 {meta}
               </span>
-              <span className="block text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-paper transition-transform duration-700 ease-(--ease-cinema) group-hover:translate-x-2">
+              <span className="block text-[clamp(2.25rem,4vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-paper transition-transform duration-700 ease-(--ease-cinema) group-hover:translate-x-2">
                 {project.title}
               </span>
               <span className="mt-3 block text-silver">
