@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Copy } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, Send } from 'lucide-react'
 import { contact } from '../content/site'
 import { useCopy } from '../hooks/useCopy'
 import { MaskedText, Reveal } from '../motion/Reveal'
@@ -20,7 +20,7 @@ export function Contact() {
       <div className="container-x relative">
         <Reveal>
           <p className="eyebrow mb-8 flex items-center gap-3 text-smoke">
-            <span className="text-paper">05</span>
+            <span className="text-paper">07</span>
             <span aria-hidden className="h-px w-8 bg-white/25" />
             Contact
           </p>
@@ -30,10 +30,29 @@ export function Contact() {
           <MaskedText text={contact.heading} />
         </h2>
 
+        <Reveal className="mt-12 md:mt-16">
+          <Magnetic>
+            <a
+              href={contact.primary.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex h-16 items-center gap-4 rounded-full bg-paper pl-7 pr-2.5 text-base font-medium text-ink-950 transition-transform duration-300 hover:scale-[1.02] md:h-[4.5rem] md:text-lg"
+            >
+              <Send className="size-5" aria-hidden />
+              {contact.primary.label}
+              <span className="grid size-11 place-items-center rounded-full bg-ink-950 text-paper transition-transform duration-500 ease-(--ease-cinema) group-hover:rotate-45 md:size-12">
+                <ArrowUpRight className="size-5" aria-hidden />
+              </span>
+              <span className="sr-only">(opens Telegram)</span>
+            </a>
+          </Magnetic>
+          <p className="mt-4 text-sm text-silver">Fastest way to reach me. Share your product, deadline and a reference you like.</p>
+        </Reveal>
+
         <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-12 md:items-end">
           {contact.email ? (
             <Reveal className="md:col-span-7">
-              <p className="eyebrow mb-4 text-smoke">Write to me</p>
+              <p className="eyebrow mb-4 text-smoke">Or write to me</p>
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href={`mailto:${contact.email}`}

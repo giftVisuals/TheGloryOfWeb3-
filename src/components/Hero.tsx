@@ -1,7 +1,7 @@
-import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import { ArrowDown, Send } from 'lucide-react'
 import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue, type Transition } from 'motion/react'
 import { useRef, useState } from 'react'
-import { hero, identity } from '../content/site'
+import { contact, hero, identity } from '../content/site'
 import { asset, prefersLightMedia } from '../lib/media'
 import { ease } from '../motion/tokens'
 import { Magnetic } from './ui/Magnetic'
@@ -107,11 +107,14 @@ export function Hero() {
               </Magnetic>
               <Magnetic>
               <a
-                href="#contact"
-                className="glass glass-sheen group relative inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm text-paper transition-colors duration-300 hover:border-white/30"
+                href={contact.primary.url}
+                target="_blank"
+                rel="noreferrer"
+                className="glass glass-sheen group relative inline-flex h-12 items-center gap-2.5 rounded-full px-5 text-sm text-paper transition-colors duration-300 hover:border-white/30"
               >
-                Get in touch
-                <ArrowUpRight className="size-4 transition-transform duration-500 ease-(--ease-cinema) group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                <Send className="size-4 transition-transform duration-500 ease-(--ease-cinema) group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                Message on Telegram
+                <span className="sr-only">(opens Telegram)</span>
               </a>
               </Magnetic>
             </motion.div>
@@ -159,12 +162,13 @@ function Atmosphere({ progress }: { progress: MotionValue<number> }) {
         <motion.div
           className="absolute inset-0"
           initial={{ opacity: 0 }}
-          animate={{ opacity: videoReady || !allowPlayback ? 0.42 : 0 }}
+          animate={{ opacity: videoReady || !allowPlayback ? 0.34 : 0 }}
           transition={enter(0.6, 1.6)}
         >
           {allowPlayback ? (
             <video
-              className="size-full object-cover"
+              // Soft focus keeps the reel as atmosphere so the name stays the hero.
+              className="size-full scale-105 object-cover blur-[3px] md:blur-[2px]"
               poster={hero.backgroundPoster ? asset(hero.backgroundPoster) : undefined}
               autoPlay
               muted
@@ -177,7 +181,7 @@ function Atmosphere({ progress }: { progress: MotionValue<number> }) {
               <source src={asset(hero.backgroundVideo)} type="video/mp4" onError={() => setVideoFailed(true)} />
             </video>
           ) : hero.backgroundPoster ? (
-            <img className="size-full object-cover" src={asset(hero.backgroundPoster)} alt="" />
+            <img className="size-full scale-105 object-cover blur-[3px] md:blur-[2px]" src={asset(hero.backgroundPoster)} alt="" />
           ) : null}
         </motion.div>
       )}

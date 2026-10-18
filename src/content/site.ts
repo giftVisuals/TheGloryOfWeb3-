@@ -1,4 +1,4 @@
-import type { ContactLink, ProcessStep, Service, Testimonial, Turnaround } from '../types'
+import type { ContactLink, Faq, Package, ProcessStep, Service, Testimonial, Turnaround } from '../types'
 
 /**
  * ─────────────────────────────────────────────────────────────────────────
@@ -85,6 +85,79 @@ export const turnaround = {
   ] as Turnaround[],
 }
 
+/**
+ * "Ways to work together". Edit names, lengths and inclusions freely.
+ * Prices are intentionally not shown — set `pricing` to e.g. "From $500".
+ */
+export const packages = {
+  pricing: 'Rates on request — message me with your brief.',
+  items: [
+    {
+      name: 'Launch Film',
+      bestFor: 'Product launches and big announcements',
+      length: '30–60s',
+      turnaround: 'Under 2 hrs',
+      includes: ['Cinematic kinetic type and UI motion', '3D elements where they add impact', 'Voiceover, music and sound design', '16:9 master plus a 9:16 cut'],
+    },
+    {
+      name: 'Feature Explainer',
+      bestFor: 'New features and how-it-works',
+      length: '20–45s',
+      turnaround: 'Under 2 hrs',
+      includes: ['Step-by-step story that lands in one watch', 'Animated walkthrough of your real UI', 'Captions built for silent autoplay', 'Vertical-first for X and TikTok'],
+    },
+    {
+      name: 'AI UGC Ad',
+      bestFor: 'Social ads that feel native',
+      length: '15–60s',
+      turnaround: 'Under 4 hrs',
+      includes: ['Ultra-realistic AI creator', 'Voice and talking performance', 'Hook-first edit with motion graphics', 'Vertical and landscape versions'],
+    },
+    {
+      name: 'Content Retainer',
+      bestFor: 'Teams shipping every week',
+      length: 'Monthly',
+      turnaround: 'Planned around your roadmap',
+      includes: ['A set number of videos each month', 'Reserved slots in my schedule', 'One consistent visual system', 'Mix of films, explainers and AI UGC'],
+    },
+  ] as Package[],
+}
+
+/** Frequently asked questions. Answers marked CONFIRM should be checked by you. */
+export const faq: Faq[] = [
+  {
+    q: 'How fast can you deliver?',
+    a: 'Motion design is delivered in under 2 hours, and ultra-realistic AI UGC with motion design in under 4 hours, once the brief and assets are in.',
+  },
+  {
+    q: 'What do you need from me to start?',
+    a: 'A link to your product or screen recordings of the flow you want shown, your brand kit (logo, colours, fonts), the key message or script, and one or two videos you like the feel of.',
+  },
+  {
+    q: 'Do you handle voiceover, music and sound design?',
+    a: 'Yes. Voiceover, music, sound effects and the full sound mix can all be included, so you receive a finished, ready-to-post video.',
+  },
+  {
+    q: 'Which formats do you deliver?',
+    a: 'Landscape 16:9 for X, YouTube and your site, and vertical 9:16 for TikTok, Reels and Shorts, exported as high-quality MP4 files.',
+  },
+  {
+    // CONFIRM: your revision policy.
+    q: 'Are revisions included?',
+    a: 'Yes. Revisions are agreed before we start so the scope is clear on both sides.',
+  },
+  {
+    // CONFIRM: payment methods (e.g. USDC, SOL, bank transfer) and terms.
+    q: 'How does payment work?',
+    a: 'Payment terms and methods are agreed upfront for each project. Message me on Telegram for details.',
+  },
+  {
+    // CONFIRM: your confidentiality policy.
+    q: 'Can you keep an unreleased product confidential?',
+    a: 'Yes. Work stays private until you launch, and nothing appears in my portfolio without your approval.',
+  },
+]
+
 export const process: ProcessStep[] = [
   { title: 'Discovery', description: 'Understand the concept, audience, objective and creative direction.' },
   { title: 'Structure', description: 'Develop the narrative, pacing and visual approach.' },
@@ -105,6 +178,8 @@ export const credibility = {
 
 export const contact = {
   heading: 'Have a story worth bringing to life?',
+  /** Main call to action across the site (hero, contact, sticky mobile button). */
+  primary: { label: 'Message me on Telegram', short: 'Start a project', url: 'https://t.me/TheGlory0fweb3' },
   /** Your public business email, e.g. "hello@yourdomain.com". Empty = hidden. */
   email: 'Aweglory388@gmail.com',
   /** Only real, working profiles. Shown in the contact section and footer. */

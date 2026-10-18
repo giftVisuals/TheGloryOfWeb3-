@@ -15,7 +15,7 @@ export function Process() {
     <section id="process" aria-labelledby="process-title" className="relative overflow-hidden py-24 md:py-36">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[40rem] w-[80rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.06),transparent)]" />
       <div className="container-x relative">
-        <SectionHeading index="04" label="Process" title="From brief to final export." id="process-title" />
+        <SectionHeading index="05" label="Process" title="From brief to final export." id="process-title" />
 
         <div className="relative mt-16 md:mt-24">
         <div aria-hidden className="absolute left-0 right-0 top-0 hidden h-px bg-white/10 md:block">

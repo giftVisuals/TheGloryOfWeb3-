@@ -10,6 +10,7 @@ const LINKS = [
   { id: 'work', label: 'Work' },
   { id: 'about', label: 'About' },
   { id: 'services', label: 'Services' },
+  { id: 'packages', label: 'Packages' },
   { id: 'contact', label: 'Contact' },
 ]
 const IDS = LINKS.map((l) => l.id)

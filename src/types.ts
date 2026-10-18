@@ -51,6 +51,20 @@ export interface Service {
   turnaround?: string
 }
 
+export interface Package {
+  name: string
+  /** Who it is for, one short line. */
+  bestFor: string
+  length: string
+  turnaround: string
+  includes: string[]
+}
+
+export interface Faq {
+  q: string
+  a: string
+}
+
 export interface Turnaround {
   /** Upper bound in hours; animated as "< N hrs". */
   hours: number

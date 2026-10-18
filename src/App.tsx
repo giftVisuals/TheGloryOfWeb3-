@@ -4,11 +4,14 @@ import { About } from './components/About'
 import { Contact } from './components/Contact'
 import { Credibility } from './components/Credibility'
 import { Cursor } from './components/Cursor'
+import { Faq } from './components/Faq'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Marquee } from './components/Marquee'
 import { ScrollProgress } from './components/ScrollProgress'
+import { StickyCta } from './components/StickyCta'
 import { Nav } from './components/Nav'
+import { Packages } from './components/Packages'
 import { Process } from './components/Process'
 import { Services } from './components/Services'
 import { WorkGallery } from './components/WorkGallery'
@@ -38,12 +41,15 @@ export default function App() {
           <WorkGallery projects={projects} onOpen={open} />
           <About />
           <Services />
+          <Packages />
           <Process />
           <Credibility />
+          <Faq />
           <Contact />
         </main>
         <Footer />
         <Cursor />
+        <StickyCta />
 
         <Suspense fallback={null}>
           <AnimatePresence>
