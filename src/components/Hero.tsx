@@ -159,13 +159,12 @@ function Atmosphere({ progress }: { progress: MotionValue<number> }) {
         <motion.div
           className="absolute inset-0"
           initial={{ opacity: 0 }}
-          animate={{ opacity: videoReady || !allowPlayback ? 0.55 : 0 }}
+          animate={{ opacity: videoReady || !allowPlayback ? 0.42 : 0 }}
           transition={enter(0.6, 1.6)}
         >
           {allowPlayback ? (
             <video
               className="size-full object-cover"
-              src={asset(hero.backgroundVideo)}
               poster={hero.backgroundPoster ? asset(hero.backgroundPoster) : undefined}
               autoPlay
               muted
@@ -173,8 +172,10 @@ function Atmosphere({ progress }: { progress: MotionValue<number> }) {
               playsInline
               preload="metadata"
               onPlaying={() => setVideoReady(true)}
-              onError={() => setVideoFailed(true)}
-            />
+            >
+              {hero.backgroundVideoWebm && <source src={asset(hero.backgroundVideoWebm)} type="video/webm" />}
+              <source src={asset(hero.backgroundVideo)} type="video/mp4" onError={() => setVideoFailed(true)} />
+            </video>
           ) : hero.backgroundPoster ? (
             <img className="size-full object-cover" src={asset(hero.backgroundPoster)} alt="" />
           ) : null}

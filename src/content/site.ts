@@ -23,8 +23,10 @@ export const hero = {
    * Google Drive links cannot be used here. Leave empty to keep the
    * generated light composition.
    */
-  backgroundVideo: '',
-  backgroundPoster: '',
+  backgroundVideo: 'media/showreel-loop.mp4',
+  /** Optional WebM copy of the reel; browsers pick the format they support. */
+  backgroundVideoWebm: 'media/showreel-loop.webm',
+  backgroundPoster: 'media/showreel-poster.jpg',
 }
 
 export const about = {
